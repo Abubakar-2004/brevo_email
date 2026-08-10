@@ -14,7 +14,7 @@ def register(request):
             user.set_password(form.cleaned_data["password"])
             user.save()
 
-            activation_link = "http://127.0.0.1:8000/activate/" + str(user.id)
+            activation_link = f"{request.scheme}://{request.get_host()}/activate/{user.id}"
 
             send_mail(
                 subject="Activate your account",
